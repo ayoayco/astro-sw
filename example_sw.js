@@ -1,6 +1,6 @@
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
- * -- find usage in `astro.config.mjs` integrations
+ * -- find usage in package readme; `astro.config.mjs` integrations
  * @see https://ayco.io/n/@ayco/astro-sw
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
