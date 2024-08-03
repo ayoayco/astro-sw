@@ -12,11 +12,6 @@ import { randomUUID } from "node:crypto";
  * @typedef {import('astro').AstroIntegration} AstroIntegration
  */
 
-/**
- * @type {Array<string>}
- */
-let assets = [];
-
 const plugin_dir = path.resolve(path.dirname('.'));
 
 /**
@@ -32,7 +27,10 @@ export default function serviceWorker(config) {
         path: serviceWorkerPath
     } = config;
 
-    console.log('[astro-sw] dir', plugin_dir)
+    /**
+     * @type {Array<string>}
+     */
+    let assets = [];
 
     return {
         'name': 'astro-sw',
