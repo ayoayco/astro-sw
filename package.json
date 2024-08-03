@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Simple Astro integration to use your own authored service-worker",
   "main": "index.ts",
+  "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
