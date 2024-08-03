@@ -1,6 +1,6 @@
 {
   "name": "@ayco/astro-sw",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple Astro integration to use your own authored service-worker",
   "main": "index.js",
   "type": "module",
