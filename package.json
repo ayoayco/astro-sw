@@ -1,0 +1,21 @@
+{
+  "name": "@ayco/astro-sw",
+  "version": "0.0.1",
+  "description": "Simple Astro integration to use your own authored service-worker",
+  "main": "index.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "withastro",
+    "perf"
+  ],
+  "author": "Ayo Ayco",
+  "license": "MIT",
+  "devDependencies": {
+    "astro": "^4.13.1"
+  }
+}
