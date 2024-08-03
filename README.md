@@ -9,10 +9,10 @@ The integration `serviceWorker` accepts configuration with service worker path a
 In your [Astro](https://astro.build) project:
 
 ```bash
-# npm
+# if using npm
 $ npm i -D @ayco/astro-sw
 
-# pnpm
+# if using pnpm
 $ pnpm add -D @ayco/astro-sw
 ```
 
