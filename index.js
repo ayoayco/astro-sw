@@ -38,14 +38,14 @@ export default function serviceWorker(config) {
             },
             'astro:build:done': async ({ dir }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
+                const __dirname = path.resolve(path.dirname('.'));
+                const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
                 try {
-                    const __dirname = path.resolve(path.dirname('.'));
-                    const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                     console.log('[astro-sw] Using service worker:', swPath);
                     originalScript = await readFile(swPath);
                 } catch {
-                    throw Error('[astro-sw] ERROR: service worker script not found!')
+                    throw Error('[astro-sw] ERROR: service worker script not found!', swPath)
                 }
                 const assetsDeclaration = `const __assets = ${JSON.stringify(assets)};\n`;
                 const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`;

@@ -9,7 +9,7 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./index.js"
     }
   },
   "main": "index.js",
@@ -18,6 +18,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "start": "astro dev",
+    "build": "astro build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,6 +29,8 @@
   "author": "Ayo Ayco",
   "license": "MIT",
   "devDependencies": {
-    "astro": "^4.13.1"
+    "astro": "^4.13.1",
+    "@astrojs/node": "^8.3.2",
+    "@ayco/astro-sw": "*"
   }
 }
