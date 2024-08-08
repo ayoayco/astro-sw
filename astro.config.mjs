@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
-import serviceWorker from "@ayco/astro-sw";
+import serviceWorker from "./index.js";
 
 export default defineConfig({
   output: "server",
@@ -9,7 +9,7 @@ export default defineConfig({
   }),
   integrations: [
     serviceWorker({
-      path: "./example-sw.js",
+      path: "./example_sw.js",
       assetCachePrefix: 'cozy-reader',
     })
   ]

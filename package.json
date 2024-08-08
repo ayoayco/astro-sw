@@ -30,7 +30,6 @@
   "license": "MIT",
   "devDependencies": {
     "astro": "^4.13.1",
-    "@astrojs/node": "^8.3.2",
-    "@ayco/astro-sw": "*"
+    "@astrojs/node": "^8.3.2"
   }
 }
