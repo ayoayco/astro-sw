@@ -29,7 +29,7 @@
   "author": "Ayo Ayco",
   "license": "MIT",
   "devDependencies": {
-    "astro": "^4.13.1",
-    "@astrojs/node": "^8.3.2"
+    "@astrojs/node": "^8.3.2",
+    "astro": "^4.13.3"
   }
 }
