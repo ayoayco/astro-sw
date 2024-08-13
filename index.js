@@ -77,7 +77,7 @@ export default function serviceWorker(config) {
                 injectScript('page', registrationScript);
             },
             'astro:build:ssr': ({ manifest }) => {
-                assets = manifest.assets.filter(ass => !ass.includes('sw.js'))
+                assets = [...new Set(manifest.assets ?? [])].filter(ass => !ass.includes('sw.js'))
             },
             'astro:build:done': async ({ dir }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
