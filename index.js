@@ -79,7 +79,7 @@ export default function serviceWorker(config) {
             'astro:build:ssr': ({ manifest }) => {
                 assets = manifest.assets.filter(ass => !ass.includes('sw.js'))
             },
-            'astro:build:done': async ({ dir, routes }) => {
+            'astro:build:done': async ({ dir, routes, pages,  }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
                 const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
@@ -88,9 +88,21 @@ export default function serviceWorker(config) {
                 const _routes = routes
                     .filter(({isIndex}) => isIndex)
                     .map(({pathname}) => pathname)
+                    .filter(pathname => pathname !== '')
                     ?? [];
 
-                assets = [...new Set([...assets, ..._routes])]
+                const _pages = pages
+                    .map(({pathname}) => {
+                        const lastChar = pathname.slice(-1);
+                        const len = pathname.length;
+                        return lastChar === '/'
+                            ? `/${pathname.slice(0, len-1)}`
+                            : `/${pathname}`;
+                    })
+                    .filter(pathname => pathname !== '')
+                    ?? [];
+
+                assets = [...new Set([...assets, ..._routes, ..._pages])]
 
                 console.log('>>> assets', assets);
 

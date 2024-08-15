@@ -3,7 +3,7 @@ import node from "@astrojs/node";
 import serviceWorker from "./index.js";
 
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   adapter: node({
     mode: "middleware"
   }),
