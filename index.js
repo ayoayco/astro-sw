@@ -65,7 +65,7 @@ export default function serviceWorker(config) {
     return {
         'name': 'astro-sw',
         'hooks': {
-            'astro:config:setup': ({injectScript, config}) => {
+            'astro:config:setup': ({ injectScript, config }) => {
                 output = config.output;
                 injectScript('page', registrationScript);
             },
@@ -77,48 +77,50 @@ export default function serviceWorker(config) {
                     ? assetsMinusFiles
                     : manifest.assets.filter(ass => !ass.includes('sw.js'));
             },
-            'astro:build:done': async ({ dir, routes, pages,  }) => {
+            'astro:build:done': async ({ dir, routes, pages, }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
                 const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
 
-                const _publicFiles = (await readdir(dir, {withFileTypes: true}) ?? [])
+                const _publicFiles = (await readdir(dir, { withFileTypes: true }) ?? [])
                     .filter(dirent => dirent.isFile())
                     .map(dirent => `/${dirent.name}`);
 
                 const _routes = routes
-                    .filter(({isIndex}) => isIndex)
-                    .map(({pathname}) => pathname)
+                    .filter(({ isIndex }) => isIndex)
+                    .map(({ pathname }) => pathname)
                     .filter(pathname => pathname !== '')
                     ?? [];
 
                 const _pages = pages
-                    .filter(({pathname}) => pathname !== '')
-                    .map(({pathname}) => `/${pathname}`)
+                    .filter(({ pathname }) => pathname !== '')
+                    .map(({ pathname }) => `/${pathname}`)
                     ?? [];
 
                 const _pagesWithoutEndSlash = pages
-                    .filter(({pathname}) => pathname !== '')
-                    .map(({pathname}) => {
+                    .filter(({ pathname }) => pathname !== '')
+                    .map(({ pathname }) => {
                         const lastChar = pathname.slice(-1);
                         const len = pathname.length;
                         return lastChar === '/'
-                            ? `/${pathname.slice(0, len-1)}`
+                            ? `/${pathname.slice(0, len - 1)}`
                             : `/${pathname}`;
                     })
                     .filter(pathname => pathname !== '')
                     ?? [];
 
                 assets = [...new Set([
-                        ...assets,
-                        ..._routes,
-                        ..._pages,
-                        ..._pagesWithoutEndSlash,
-                        ...customRoutes,
-                        ..._publicFiles
-                    ])]
-                    .filter(asset => !!asset && asset !== '' && !asset.includes('404'));
+                    ...assets,
+                    ..._routes,
+                    ..._pages,
+                    ..._pagesWithoutEndSlash,
+                    ...customRoutes,
+                    ..._publicFiles
+                ])].filter(asset => !!asset
+                    && asset !== ''
+                    && !asset.includes('404')
+                    && !asset.includes('index.html'));
 
                 console.log('[astro-sw] Assets for caching:', assets);
 
