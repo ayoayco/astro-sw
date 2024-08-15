@@ -77,13 +77,23 @@ export default function serviceWorker(config) {
                 injectScript('page', registrationScript);
             },
             'astro:build:ssr': ({ manifest }) => {
-                assets = [...new Set(manifest.assets ?? [])].filter(ass => !ass.includes('sw.js'))
+                assets = manifest.assets.filter(ass => !ass.includes('sw.js'))
             },
-            'astro:build:done': async ({ dir }) => {
+            'astro:build:done': async ({ dir, routes }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
                 const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
+
+                const _routes = routes
+                    .filter(({isIndex}) => isIndex)
+                    .map(({pathname}) => pathname)
+                    ?? [];
+
+                assets = [...new Set([...assets, ..._routes])]
+
+                console.log('>>> assets', assets);
+
                 try {
                     console.log('[astro-sw] Using service worker:', swPath);
                     originalScript = await readFile(swPath);
