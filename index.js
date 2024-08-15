@@ -117,6 +117,7 @@ export default function serviceWorker(config) {
                     ?? [];
 
                 assets = [...new Set([...assets, ..._routes, ..._pages, ..._pagesWithoutEndSlash])]
+                    .filter(asset => !asset.includes('404'));
                 console.log('>>> assets', assets);
 
                 try {
