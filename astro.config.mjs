@@ -13,7 +13,7 @@ export default defineConfig({
       path: "./example_sw.js",
       assetCachePrefix: 'cozy-reader',
       customRoutes: [
-        '/treads'
+        '/threads'
       ]
     })
   ]

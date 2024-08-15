@@ -1,6 +1,6 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import path from 'pathe';
 import { randomUUID } from "node:crypto";
 
 /**
@@ -83,6 +83,10 @@ export default function serviceWorker(config) {
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
 
+                const _publicFiles = (await readdir(dir, {withFileTypes: true}) ?? [])
+                    .filter(dirent => dirent.isFile())
+                    .map(dirent => `/${dirent.name}`);
+
                 const _routes = routes
                     .filter(({isIndex}) => isIndex)
                     .map(({pathname}) => pathname)
@@ -111,9 +115,10 @@ export default function serviceWorker(config) {
                         ..._routes,
                         ..._pages,
                         ..._pagesWithoutEndSlash,
-                        ...customRoutes
+                        ...customRoutes,
+                        ..._publicFiles
                     ])]
-                    .filter(asset => !asset.includes('404'));
+                    .filter(asset => !!asset && asset !== '' && !asset.includes('404'));
 
                 console.log('[astro-sw] Assets for caching:', assets);
 
