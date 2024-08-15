@@ -12,10 +12,9 @@ export default defineConfig({
     serviceWorker({
       path: "./example_sw.js",
       assetCachePrefix: 'cozy-reader',
-      // onInstalled: () => console.log('Installed...'),
-      // onInstalling: () => console.log('Installing...'),
-      // onActive: () => console.log('Active!'),
-      // onError: (error) => console.error(`Registration failed on ${error}`)
+      customRoutes: [
+        '/treads'
+      ]
     })
   ]
 });
