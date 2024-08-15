@@ -70,14 +70,22 @@ export default function serviceWorker(config) {
 
         registerSW();`
 
+    let output = 'static'
+
     return {
         'name': 'astro-sw',
         'hooks': {
-            'astro:config:setup': ({injectScript}) => {
+            'astro:config:setup': ({injectScript, config}) => {
+                output = config.output;
                 injectScript('page', registrationScript);
             },
             'astro:build:ssr': ({ manifest }) => {
-                assets = manifest.assets.filter(ass => !ass.includes('sw.js'))
+                const files = manifest.routes.map(route => route.file.replaceAll('/', ''));
+                const assetsMinusFiles = manifest.assets.filter(ass => !files.includes(ass.replaceAll('/', '')));
+
+                assets = output === 'static'
+                    ? assetsMinusFiles
+                    : manifest.assets.filter(ass => !ass.includes('sw.js'));
             },
             'astro:build:done': async ({ dir, routes, pages,  }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
@@ -92,11 +100,12 @@ export default function serviceWorker(config) {
                     ?? [];
 
                 const _pages = pages
-                    .map(({pathname}) => pathname)
-                    .filter(pathname => pathname !== '')
+                    .filter(({pathname}) => pathname !== '')
+                    .map(({pathname}) => `/${pathname}`)
                     ?? [];
 
                 const _pagesWithoutEndSlash = pages
+                    .filter(({pathname}) => pathname !== '')
                     .map(({pathname}) => {
                         const lastChar = pathname.slice(-1);
                         const len = pathname.length;
@@ -108,6 +117,7 @@ export default function serviceWorker(config) {
                     ?? [];
 
                 assets = [...new Set([...assets, ..._routes, ..._pages, ..._pagesWithoutEndSlash])]
+                console.log('>>> assets', assets);
 
                 try {
                     console.log('[astro-sw] Using service worker:', swPath);
