@@ -104,8 +104,6 @@ export default function serviceWorker(config) {
 
                 assets = [...new Set([...assets, ..._routes, ..._pages])]
 
-                console.log('>>> assets', assets);
-
                 try {
                     console.log('[astro-sw] Using service worker:', swPath);
                     originalScript = await readFile(swPath);
