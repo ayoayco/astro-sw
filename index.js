@@ -92,6 +92,11 @@ export default function serviceWorker(config) {
                     ?? [];
 
                 const _pages = pages
+                    .map(({pathname}) => pathname)
+                    .filter(pathname => pathname !== '')
+                    ?? [];
+
+                const _pagesWithoutEndSlash = pages
                     .map(({pathname}) => {
                         const lastChar = pathname.slice(-1);
                         const len = pathname.length;
@@ -102,7 +107,7 @@ export default function serviceWorker(config) {
                     .filter(pathname => pathname !== '')
                     ?? [];
 
-                assets = [...new Set([...assets, ..._routes, ..._pages])]
+                assets = [...new Set([...assets, ..._routes, ..._pages, ..._pagesWithoutEndSlash])]
 
                 try {
                     console.log('[astro-sw] Using service worker:', swPath);
