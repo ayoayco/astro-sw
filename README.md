@@ -50,6 +50,8 @@ The integration accepts a configuration object of type `ServiceWorkerConfig` wit
 | path | string | required | path to your *own* service worker script; no surprises & easy debugging |
 | assetCachePrefix | string | optional | cache storage name prefix; useful for debugging |
 | assetCacheVersionID | string | optional | cache storage name versioning; by default, a random UUID is used but you can provide your own for easy debugging & invalidation |
+| customRoutes | string[] | optional | list of custom routes you want to be cached. Beware that non-existent routes that result to HTTP Error404 will cause the service worker to fail |
+| excludeRoutes | string[] | optional | list of routes you want to be ignored/removed from assets |
 
 ## Example sw.js
 
