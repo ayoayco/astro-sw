@@ -9,6 +9,7 @@ import { randomUUID } from "node:crypto";
  *  assetCachePrefix?: string,
  *  assetCacheVersionID?: string,
  *  customRoutes?: Array<string>,
+ *  excludeRoutes?: Array<string,
  * }} ServiceWorkerConfig
  * @typedef {import('astro').AstroIntegration} AstroIntegration
  */
@@ -24,7 +25,8 @@ export default function serviceWorker(config) {
         assetCachePrefix,
         assetCacheVersionID = randomUUID(),
         path: serviceWorkerPath,
-        customRoutes = []
+        customRoutes = [],
+        excludeRoutes = []
     } = config;
 
     /**
@@ -110,6 +112,11 @@ export default function serviceWorker(config) {
                     .filter(pathname => pathname !== '')
                     ?? [];
 
+                const _excludeRoutes = [
+                    ...excludeRoutes,
+                    ...excludeRoutes.map(route => `${route}/`)
+                ];
+
                 assets = [...new Set([
                     ...assets,
                     ..._routes,
@@ -120,7 +127,9 @@ export default function serviceWorker(config) {
                 ])].filter(asset => !!asset
                     && asset !== ''
                     && !asset.includes('404')
-                    && !asset.includes('index.html'));
+                    && !asset.includes('index.html')
+                    && !_excludeRoutes.includes(asset)
+                );
 
                 console.log('[astro-sw] Assets for caching:', assets);
 

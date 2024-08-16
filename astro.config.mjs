@@ -14,6 +14,9 @@ export default defineConfig({
       assetCachePrefix: 'cozy-reader',
       customRoutes: [
         '/threads'
+      ],
+      excludeRoutes: [
+        '/exclude'
       ]
     })
   ]
