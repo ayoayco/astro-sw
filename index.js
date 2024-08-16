@@ -79,7 +79,7 @@ export default function serviceWorker(config) {
                     ? assetsMinusFiles
                     : manifest.assets.filter(ass => !ass.includes('sw.js'));
             },
-            'astro:build:done': async ({ dir, routes, pages, }) => {
+            'astro:build:done': async ({ dir, routes, pages, logger }) => {
                 const outFile = fileURLToPath(new URL('./sw.js', dir));
                 const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
@@ -131,13 +131,13 @@ export default function serviceWorker(config) {
                     && !_excludeRoutes.includes(asset)
                 );
 
-                console.log('[astro-sw] Assets for caching:', assets);
+                logger.info(`${assets.length} pages and assets for caching.`);
 
                 try {
-                    console.log('[astro-sw] Using service worker:', swPath);
+                    logger.info(`Using service worker: ${swPath}`);
                     originalScript = await readFile(swPath);
                 } catch {
-                    throw Error('[astro-sw] ERROR: service worker script not found!', swPath)
+                    logger.error(`Service worker script not found! ${swPath}`)
                 }
                 const assetsDeclaration = `const __assets = ${JSON.stringify(assets)};\n`;
                 const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`;
