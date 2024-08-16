@@ -134,6 +134,10 @@ export default function serviceWorker(config) {
                 const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`;
                 const prefixDeclaration = `const __prefix = ${JSON.stringify(assetCachePrefix)};\n`;
 
+                /**
+                 * TODO: allow importing in dev's sw.js by resolving imports
+                 */
+
                 await writeFile(
                     outFile,
                     assetsDeclaration + versionDeclaration + prefixDeclaration + originalScript
