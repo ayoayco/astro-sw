@@ -9,7 +9,7 @@ import { randomUUID } from "node:crypto";
  *  assetCachePrefix?: string,
  *  assetCacheVersionID?: string,
  *  customRoutes?: Array<string>,
- *  excludeRoutes?: Array<string,
+ *  excludeRoutes?: Array<string
  * }} ServiceWorkerConfig
  * @typedef {import('astro').AstroIntegration} AstroIntegration
  */
