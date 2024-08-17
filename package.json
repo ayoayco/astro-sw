@@ -1,6 +1,6 @@
 {
   "name": "@ayco/astro-sw",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Simple Astro integration to use your own authored service worker",
   "homepage": "https://github.com/ayoayco/astro-sw",
   "repository": {
