@@ -8,19 +8,19 @@ importers:
 
   .:
     dependencies:
-      esbuild:
-        specifier: ^0.23.1
-        version: 0.23.1
-    devDependencies:
       '@astrojs/node':
         specifier: ^8.3.3
         version: 8.3.3(astro@4.14.2(rollup@4.20.0)(typescript@5.5.4))
-      astro:
-        specifier: ^4.14.2
-        version: 4.14.2(rollup@4.20.0)(typescript@5.5.4)
+      esbuild:
+        specifier: ^0.23.1
+        version: 0.23.1
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
+    devDependencies:
+      astro:
+        specifier: ^4.14.2
+        version: 4.14.2(rollup@4.20.0)(typescript@5.5.4)
 
 packages:
 
