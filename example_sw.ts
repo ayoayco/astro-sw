@@ -1,3 +1,5 @@
+import { log } from "./src/utils";
+
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  * -- find usage in package readme; `astro.config.mjs` integrations
@@ -9,6 +11,8 @@ const addResourcesToCache = async (resources) => {
     console.log('adding resources to cache...', resources)
     await cache.addAll(resources);
 };
+
+log('test log', {hello: 'world'});
 
 const putInCache = async (request, response) => {
     const cache = await caches.open(cacheName);

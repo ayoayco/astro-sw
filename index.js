@@ -1,17 +1,21 @@
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import path from 'pathe';
 import { randomUUID } from "node:crypto";
+import path from 'pathe';
+import { build } from 'esbuild';
 
 /**
+ * @typedef {import('astro').AstroIntegration} AstroIntegration
+ * @typedef {import('esbuild').BuildOptions} BuildOptions
  * @typedef {{
  *  path: string,
  *  assetCachePrefix?: string,
  *  assetCacheVersionID?: string,
  *  customRoutes?: Array<string>,
- *  excludeRoutes?: Array<string
+ *  excludeRoutes?: Array<string,
+ *  logAssets?: true,
+ *  esbuild?: BuildOptions
  * }} ServiceWorkerConfig
- * @typedef {import('astro').AstroIntegration} AstroIntegration
  */
 
 /**
@@ -26,7 +30,9 @@ export default function serviceWorker(config) {
         assetCacheVersionID = randomUUID(),
         path: serviceWorkerPath,
         customRoutes = [],
-        excludeRoutes = []
+        excludeRoutes = [],
+        logAssets = false,
+        esbuild = {}
     } = config;
 
     /**
@@ -62,14 +68,16 @@ export default function serviceWorker(config) {
 
         registerSW();`
 
-    let output = 'static'
+    let output = 'static';
 
     return {
         'name': 'astro-sw',
         'hooks': {
-            'astro:config:setup': ({ injectScript, config }) => {
+            'astro:config:setup': ({ injectScript, config, command }) => {
                 output = config.output;
-                injectScript('page', registrationScript);
+                if (command === 'build') {
+                    injectScript('page', registrationScript);
+                }
             },
             'astro:build:ssr': ({ manifest }) => {
                 const files = manifest.routes.map(route => route.file.replaceAll('/', ''));
@@ -80,7 +88,7 @@ export default function serviceWorker(config) {
                     : manifest.assets.filter(ass => !ass.includes('sw.js'));
             },
             'astro:build:done': async ({ dir, routes, pages, logger }) => {
-                const outFile = fileURLToPath(new URL('./sw.js', dir));
+                const outfile = fileURLToPath(new URL('./sw.js', dir));
                 const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
@@ -131,7 +139,11 @@ export default function serviceWorker(config) {
                     && !_excludeRoutes.includes(asset)
                 );
 
-                logger.info(`${assets.length} pages and assets for caching.`);
+                logger.info(`${assets.length} assets for caching.`);
+
+                if (logAssets) {
+                    logger.info('Assets: ' + assets.toString().replaceAll(',', ', '));
+                }
 
                 try {
                     logger.info(`Using service worker: ${swPath}`);
@@ -139,6 +151,7 @@ export default function serviceWorker(config) {
                 } catch {
                     logger.error(`Service worker script not found! ${swPath}`)
                 }
+
                 const assetsDeclaration = `const __assets = ${JSON.stringify(assets)};\n`;
                 const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`;
                 const prefixDeclaration = `const __prefix = ${JSON.stringify(assetCachePrefix)};\n`;
@@ -147,10 +160,36 @@ export default function serviceWorker(config) {
                  * TODO: allow importing in dev's sw.js by resolving imports
                  */
 
-                await writeFile(
-                    outFile,
-                    assetsDeclaration + versionDeclaration + prefixDeclaration + originalScript
-                );
+                const tempFile = `${swPath}.tmp.ts`;
+
+                try {
+                    await writeFile(
+                        tempFile,
+                        assetsDeclaration + versionDeclaration + prefixDeclaration + originalScript,
+                        { flag: 'w+' }
+                    );
+                } catch (err) {
+                    logger.error(err.toString())
+                }
+
+                try {
+                    await build({
+                        entryPoints: [tempFile],
+                        outfile,
+                        platform: 'browser',
+                        bundle: true,
+                        ...esbuild
+                    })
+                } catch (err) {
+                    logger.error(err.toString())
+                }
+
+                // remove temp file
+                try {
+                    await unlink(tempFile);
+                } catch (err) {
+                    logger.error(err.toString())
+                }
             }
         }
     }
