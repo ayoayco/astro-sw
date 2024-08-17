@@ -79,26 +79,13 @@ export default function serviceWorker(config) {
                 if (command === 'build') {
                     injectScript('page', registrationScript);
                 }
-
-                const injectedTypeDefinitions = `
-/***
- * @ayco/astro-sw injected variables
- */
+            },
+            'astro:config:done': async ({injectTypes, logger}) => {
+                let injectedTypes = `
 declare const __assets: string;
 declare const __version: string;
-declare const __prefix: string;
-                `
-
-                const envTs = path.join(__dirname, 'src/env.d.ts');
-                try {
-                    await writeFile(
-                        envTs,
-                        injectedTypeDefinitions,
-                        { flag: 'a+' }
-                    );
-                } catch (err) {
-                    logger.error(err.toString())
-                }
+declare const __prefix: string;`
+                injectTypes({filename: 'caching.d.ts', content: injectedTypes})
             },
             'astro:build:ssr': ({ manifest }) => {
                 const files = manifest.routes.map(route => route.file.replaceAll('/', ''));
