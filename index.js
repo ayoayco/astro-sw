@@ -120,7 +120,7 @@ declare const __prefix: string;`
 
                 const _routes = routes
                     .filter(({ isIndex }) => isIndex)
-                    .map(({ pathname }) => pathname)
+                    .flatMap(({ pathname }) => pathname === '/' ? pathname : [pathname, `${pathname}/`])
                     .filter(pathname => pathname !== '')
                     ?? [];
 
