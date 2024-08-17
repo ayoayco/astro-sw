@@ -158,7 +158,7 @@ declare const __prefix: string;`
 
 
                 if (logAssets) {
-                    logger.info(`\n\n[${ASTROSW}] ${assets.length} assets for caching: \n  ▶ ${assets.toString().replaceAll(',', ',\n  ▶ ')}\n`);
+                    logger.info(`\n\n[${ASTROSW}] ${assets.length} assets for caching: \n  ▶ ${assets.toString().replaceAll(',', '\n  ▶ ')}\n`);
                 } else {
                     logger.info(`${assets.length} assets for caching.`);
                 }
