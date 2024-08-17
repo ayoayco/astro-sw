@@ -1,11 +1,11 @@
-import { log } from "./src/utils";
+import { log } from "./utils";
 
 /**
- * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
+ * Note: @ayco/astro-sw integration injects variables `__astro_sw_cache_prefix__`, `__astro_sw_version__`, & `__astro_sw_assets__`
  * -- find usage in package readme; `astro.config.mjs` integrations
  * @see https://ayco.io/n/@ayco/astro-sw
  */
-const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
+const cacheName = `${__astro_sw_cache_prefix__ ?? 'app'}-v${__astro_sw_version__ ?? '000'}`
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
     console.log('adding resources to cache...', resources)
@@ -80,7 +80,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         addResourcesToCache([
             './',
-            ...(__assets ?? [])
+            ...(__astro_sw_assets__ ?? [])
         ])
     );
 });
