@@ -1,3 +1,8 @@
+/**
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @author Ayo Ayco <https://ayo.ayco.io>
+ */
+
 import { readFile, writeFile, readdir, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from "node:crypto";
