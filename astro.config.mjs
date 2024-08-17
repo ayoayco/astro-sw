@@ -10,9 +10,9 @@ export default defineConfig({
   site: 'https://ayo.ayco.io',
   integrations: [
     serviceWorker({
-      assetCachePrefix: 'cozy-reader',
+      path: './example_sw.js',
       customRoutes: [
-        '/threads'
+        // '/threads'
       ],
       excludeRoutes: [
         '/exclude'

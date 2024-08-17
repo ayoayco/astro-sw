@@ -9,7 +9,7 @@ import { randomUUID } from "node:crypto";
 import path from 'pathe';
 import { build } from 'esbuild';
 
-const ASTROSW = 'astro-sw';
+const ASTROSW = '@ayco/astro-sw';
 /**
  * @typedef {import('astro').AstroIntegration} AstroIntegration
  * @typedef {import('esbuild').BuildOptions} BuildOptions

@@ -20,6 +20,8 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
+    "build:preview:static": "astro build && astro preview",
+    "build:preview": "astro build && node ./server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -29,8 +31,11 @@
   "author": "Ayo Ayco",
   "license": "MIT",
   "devDependencies": {
+    "@astrojs/node": "^8.3.3",
+    "@fastify/middie": "^8.3.1",
+    "@fastify/static": "^7.0.4",
     "astro": "^4.14.2",
-    "@astrojs/node": "^8.3.3"
+    "fastify": "^4.28.1"
   },
   "dependencies": {
     "esbuild": "^0.23.1",

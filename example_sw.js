@@ -79,7 +79,6 @@ self.addEventListener('install', (event) => {
     console.log('installing...', event)
     event.waitUntil(
         addResourcesToCache([
-            './',
             ...(__assets ?? [])
         ])
     );
