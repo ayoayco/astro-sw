@@ -69,14 +69,35 @@ export default function serviceWorker(config) {
         registerSW();`
 
     let output = 'static';
+    const __dirname = path.resolve(path.dirname('.'));
 
     return {
         'name': 'astro-sw',
         'hooks': {
-            'astro:config:setup': ({ injectScript, config, command }) => {
+            'astro:config:setup': async ({ injectScript, config, command, logger }) => {
                 output = config.output;
                 if (command === 'build') {
                     injectScript('page', registrationScript);
+                }
+
+                const injectedTypeDefinitions = `
+/***
+ * @ayco/astro-sw injected variables
+ */
+declare const __assets: string;
+declare const __version: string;
+declare const __prefix: string;
+                `
+
+                const envTs = path.join(__dirname, 'src/env.d.ts');
+                try {
+                    await writeFile(
+                        envTs,
+                        injectedTypeDefinitions,
+                        { flag: 'a+' }
+                    );
+                } catch (err) {
+                    logger.error(err.toString())
                 }
             },
             'astro:build:ssr': ({ manifest }) => {
@@ -89,7 +110,6 @@ export default function serviceWorker(config) {
             },
             'astro:build:done': async ({ dir, routes, pages, logger }) => {
                 const outfile = fileURLToPath(new URL('./sw.js', dir));
-                const __dirname = path.resolve(path.dirname('.'));
                 const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                 let originalScript;
 
