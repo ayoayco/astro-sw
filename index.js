@@ -94,7 +94,7 @@ export default function serviceWorker(options) {
             },
             'astro:config:done': async ({injectTypes, logger}) => {
                 let injectedTypes = `
-declare const __assets: string;
+declare const __assets: string[];
 declare const __version: string;
 declare const __prefix: string;`
                 injectTypes({filename: 'caching.d.ts', content: injectedTypes})
