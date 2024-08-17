@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import path from 'pathe';
 import { build } from 'esbuild';
 
+const ASTROSW = 'astro-sw';
 /**
  * @typedef {import('astro').AstroIntegration} AstroIntegration
  * @typedef {import('esbuild').BuildOptions} BuildOptions
@@ -26,7 +27,7 @@ import { build } from 'esbuild';
  */
 export default function serviceWorker(config) {
     let {
-        assetCachePrefix,
+        assetCachePrefix = ASTROSW,
         assetCacheVersionID = randomUUID(),
         path: serviceWorkerPath,
         customRoutes = [],
@@ -48,21 +49,21 @@ export default function serviceWorker(config) {
                     });
                     if (registration.installing) {
                         // installingFn();
-                        console.log('[astro-sw] Installing...')
+                        console.log('[${ASTROSW}] Installing...')
                     } else if (registration.waiting) {
                         // installedFn();
-                        console.log('[astro-sw] Installed...')
+                        console.log('[${ASTROSW}] Installed...')
                     } else if (registration.active) {
                         // activeFn();
-                        console.log('[astro-sw] Active...')
+                        console.log('[${ASTROSW}] Active...')
                     }
                 } catch (error) {
                     // onError(error);
-                    console.error('[astro-sw] ERR', error)
+                    console.error('[${ASTROSW}] ERR', error)
                 }
             } else {
                 // onUnsupported();
-                console.log('[astro-sw] Browser does not support Service Worker')
+                console.log('[${ASTROSW}] Browser does not support Service Worker')
             }
         }
 
@@ -72,7 +73,7 @@ export default function serviceWorker(config) {
     const __dirname = path.resolve(path.dirname('.'));
 
     return {
-        'name': 'astro-sw',
+        'name': ASTROSW,
         'hooks': {
             'astro:config:setup': async ({ injectScript, config, command, logger }) => {
                 output = config.output;
