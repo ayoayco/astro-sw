@@ -1,4 +1,4 @@
-import { log } from "./src/utils";
+import { log } from "./utils";
 
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
@@ -78,9 +78,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('install', (event) => {
     console.log('installing...', event)
     event.waitUntil(
-        addResourcesToCache([
-            ...(__assets ?? [])
-        ])
+        addResourcesToCache(__assets ?? [])
     );
 });
 

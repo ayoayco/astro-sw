@@ -10,7 +10,7 @@ export default defineConfig({
   site: 'https://ayo.ayco.io',
   integrations: [
     serviceWorker({
-      path: './example_sw.js',
+      path: './src/example_sw.js',
       customRoutes: [
         // '/threads'
       ],

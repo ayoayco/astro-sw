@@ -78,7 +78,7 @@ The integration accepts a configuration object of type `ServiceWorkerConfig` wit
 
 ## Example sw.js
 
-You can find an example service worker (`example_sw.js`) in the [repository](https://ayco.io/gh/astro-sw).
+You can find an example service worker (`src/example_sw.js`) in the [repository](https://ayco.io/gh/astro-sw).
 
 ## Background
 
