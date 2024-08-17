@@ -1,4 +1,4 @@
-import { log } from "./utils";
+import { log } from "./src/utils";
 
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
