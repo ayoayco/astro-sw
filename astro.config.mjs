@@ -5,7 +5,7 @@ import node from "@astrojs/node";
 import serviceWorker from "./index.js";
 
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   adapter: node({
     mode: "middleware"
   }),
@@ -28,7 +28,7 @@ export default defineConfig({
         waiting: () => console.log('>>> waiting...'),
         active: () => console.log('>>> active...'),
         error: (error) => console.error('>>> error', error),
-        afterRegistration: async () => {
+        'afterRegistration': async () => {
             const sw = await navigator.serviceWorker.getRegistration();
             console.log('>>> registrered', sw)
         }
