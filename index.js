@@ -6,7 +6,6 @@
 
 import { readFile, writeFile, readdir, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { randomUUID } from "node:crypto";
 import path from 'pathe';
 import { build } from 'esbuild';
 
@@ -41,7 +40,7 @@ const ASTROSW = '@ayco/astro-sw';
 export default function serviceWorker(options) {
     let {
         assetCachePrefix = ASTROSW,
-        assetCacheVersionID = randomUUID(),
+        assetCacheVersionID = '0',
         path: serviceWorkerPath = undefined,
         customRoutes = [],
         excludeRoutes = [],
