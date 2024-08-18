@@ -82,15 +82,17 @@ export default defineConfig({
   integrations: [
     serviceWorker({
       path: "./src/sw.ts",
-      afterRegistration: async () => {
-          const sw = await navigator.serviceWorker.getRegistration();
-          console.log('>>> registrered', sw)
-      },
-      installing: () => console.log('installing...'),
-      waiting: () => console.log('waiting...'),
-      active: () => console.log('active...'),
-      error: (error) => console.error(error),
-      unsupported: () => console.log(':('),
+      registrationHooks: {
+        afterRegistration: async () => {
+            const sw = await navigator.serviceWorker.getRegistration();
+            console.log('>>> registrered', sw)
+        },
+        installing: () => console.log('installing...'),
+        waiting: () => console.log('waiting...'),
+        active: () => console.log('active...'),
+        error: (error) => console.error(error),
+        unsupported: () => console.log(':('),
+      }
     })
   ]
 });
