@@ -25,7 +25,15 @@ const ASTROSW = '@ayco/astro-sw';
  *  customRoutes?: string[],
  *  excludeRoutes?: string[],
  *  logAssets?: true,
- *  esbuild?: BuildOptions
+ *  esbuild?: BuildOptions,
+ *  registrationHooks?: {
+ *      installing?: () => void,
+ *      waiting?: () => void,
+ *      active?: () => void,
+ *      error?: (error) => void,
+ *      unsupported?: () => void,
+ *      afterRegistration?: () => void,
+ *  }
  * }} options 
  * @returns {AstroIntegration}
  */
@@ -37,8 +45,18 @@ export default function serviceWorker(options) {
         customRoutes = [],
         excludeRoutes = [],
         logAssets = false,
-        esbuild = {}
+        esbuild = {},
+        registrationHooks = {}
     } = options || {};
+
+    const {
+        installing: installingFn,
+        waiting: waitingFn,
+        active: activeFn,
+        error: errorFn,
+        unsupported: unsupportedFn,
+        afterRegistration: afterRegistrationFn,
+    } = registrationHooks;
 
     /**
      * @type {Array<string>}
@@ -52,22 +70,19 @@ export default function serviceWorker(options) {
                     scope: "/",
                     });
                     if (registration.installing) {
-                        // installingFn();
-                        console.log('[${ASTROSW}] Installing...')
+                        (${installingFn.toString()})();
                     } else if (registration.waiting) {
-                        // installedFn();
-                        console.log('[${ASTROSW}] Installed...')
+                        (${waitingFn.toString()})();
                     } else if (registration.active) {
-                        // activeFn();
-                        console.log('[${ASTROSW}] Active...')
+                        (${activeFn.toString()})();
                     }
+
+                    (${afterRegistrationFn.toString()})();
                 } catch (error) {
-                    // onError(error);
-                    console.error('[${ASTROSW}] ERR', error)
+                    (${errorFn.toString()})(error);
                 }
             } else {
-                // onUnsupported();
-                console.log('[${ASTROSW}] Browser does not support Service Worker')
+                (${unsupportedFn.toString()})();
             }
         }
 
@@ -85,7 +100,7 @@ export default function serviceWorker(options) {
                     // REQUIRED OPTION IS MISSING
                     logger.error('Missing required path to service worker script');
                 }
-
+                // const transformedScript=await transform(registrationScript)
 
                 output = _config.output;
                 if (command === 'build') {
