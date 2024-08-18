@@ -62,9 +62,43 @@ export default defineConfig({
 
 The most important variable your service worker will have access to is `__assets`, which contains all routes and public assets that Astro includes in your build. Additionally, you will also get `__prefix` and `__version` you can use for naming & invalidating your Cache storage (useful for debugging purposes).
 
+## Registration Hooks
+
+Hooks are provided for adding custom logic that triggers in various service worker registration events.
+
+The following properties are available for the `registrationHooks` configuration:
+1. `installing` - when the registration is 'installing'
+1. `waiting` - when the registration is 'waiting'
+1. `active` - when the registration is 'active'
+1. `error` - when the registration throws an error
+1. `unsupported` - when the service workers are unsupported
+1. `afterRegistration` - after the registration succeeds
+
+```js
+import { defineConfig } from "astro/config";
+import serviceWorker from "@ayco/astro-sw";
+
+export default defineConfig({
+  integrations: [
+    serviceWorker({
+      path: "./src/sw.ts",
+      afterRegistration: async () => {
+          const sw = await navigator.serviceWorker.getRegistration();
+          console.log('>>> registrered', sw)
+      },
+      installing: () => console.log('installing...'),
+      waiting: () => console.log('waiting...'),
+      active: () => console.log('active...'),
+      error: (error) => console.error(error),
+      unsupported: () => console.log(':('),
+    })
+  ]
+});
+```
+
 ## API
 
-The integration accepts a configuration object of type `ServiceWorkerConfig` with the following properties
+The integration accepts a configuration object with the following properties
 
 | property | type | required? |  notes |
 | --- | --- | --- | --- |
@@ -75,11 +109,9 @@ The integration accepts a configuration object of type `ServiceWorkerConfig` wit
 | excludeRoutes | string[] | optional | list of routes you want to be ignored/removed from assets |
 | logAssets | boolean | optional | set to see a list of the assets found; defaults to false |
 | esbuild | [BuildOptions](https://esbuild.github.io/api/) | optional | custom build options for your service worker script |
+| registrationHooks | object | optional | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks) |
+
 
 ## Example sw.js
 
-You can find an example service worker (`src/example_sw.js`) in the [repository](https://ayco.io/gh/astro-sw).
-
-## Background
-
-This Astro integration library was developed to support the Caching strategy needs of [Cozy](https://github.com/ayoayco/cozy) -- the modern reading companion for the Web.
+This integration was developed to support the Caching strategy needs of [Cozy](https://github.com/ayoayco/cozy) -- the modern reading companion for the Web. You can find an example service worker (`src/sw.mjs`) in the [repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
