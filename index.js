@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * @license MIT <https://opensource.org/licenses/MIT>
  * @author Ayo Ayco <https://ayo.ayco.io>
@@ -50,12 +51,12 @@ export default function serviceWorker(options) {
     } = options || {};
 
     const {
-        installing: installingFn,
-        waiting: waitingFn,
-        active: activeFn,
-        error: errorFn,
-        unsupported: unsupportedFn,
-        afterRegistration: afterRegistrationFn,
+        installing: installingFn = () => {},
+        waiting: waitingFn = () => {},
+        active: activeFn = () => {},
+        error: errorFn = () => {},
+        unsupported: unsupportedFn = () => {},
+        afterRegistration: afterRegistrationFn = () => {},
     } = registrationHooks;
 
     /**
