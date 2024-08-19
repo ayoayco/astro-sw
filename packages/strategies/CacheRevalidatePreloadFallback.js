@@ -142,7 +142,7 @@ const fetchFn = (event) => {
 
 const waitFn = (event) => {}
 
-export default {
+export const CacheRevalidatePreloadFallback = {
     fetchFn,
     installFn,
     activateFn,

@@ -33,6 +33,14 @@ const ASTROSW = '@ayco/astro-sw';
  *      unsupported?: () => void,
  *      afterRegistration?: () => void,
  *  }
+ *  experimental?: {
+ *      strategy?:  {
+ *          fetchFn: () => void,
+ *          installFn: () => void,
+ *          activateFn: () => void,
+ *          waitFn: () => void,
+ *      }
+ *  }
  * }} options 
  * @returns {AstroIntegration}
  */

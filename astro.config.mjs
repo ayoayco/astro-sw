@@ -3,6 +3,7 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
 import serviceWorker from "./packages/index.js";
+import { Strategies } from "./packages/strategies/index.js";
 
 export default defineConfig({
   output: "hybrid",
@@ -32,6 +33,9 @@ export default defineConfig({
             const sw = await navigator.serviceWorker.getRegistration();
             console.log('>>> registrered', sw)
         }
+      },
+      experimental: {
+        strategy: Strategies.CacheRevalidatePreloadFallback,
       }
     })
   ]
