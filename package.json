@@ -9,10 +9,10 @@
   },
   "exports": {
     ".": {
-      "import": "./index.js"
+      "import": "./packages/index.js"
     }
   },
-  "main": "index.js",
+  "main": "./packages/index.js",
   "type": "module",
   "engines": {
     "node": ">=18.0.0"

@@ -2,7 +2,7 @@
 
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
-import serviceWorker from "./index.js";
+import serviceWorker from "./packages/index.js";
 
 export default defineConfig({
   output: "hybrid",
