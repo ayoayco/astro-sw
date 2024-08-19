@@ -1,4 +1,3 @@
-// @ts-check
 /**
  * @license MIT <https://opensource.org/licenses/MIT>
  * @author Ayo Ayco <https://ayo.ayco.io>
