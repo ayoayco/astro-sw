@@ -116,4 +116,4 @@ The integration accepts a configuration object with the following properties
 
 ## Background
 
-This integration was developed to support the Caching strategy needs of [Cozy](https://github.com/ayoayco/cozy) -- the modern reading companion for the Web. You can find an example service worker (`src/sw.mjs`) in the [repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
+This integration was developed to support the Caching strategy needs of [Cozy](https://cozy.ayco.io) -- the modern reading companion for the Web. You can find [an example service worker in the repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
