@@ -9,10 +9,10 @@
   },
   "exports": {
     ".": {
-      "import": "./packages/index.js"
+      "import": "./astro-sw.js"
     }
   },
-  "main": "./packages/index.js",
+  "main": "./astro-sw.js",
   "type": "module",
   "engines": {
     "node": ">=18.0.0"
@@ -38,7 +38,6 @@
     "fastify": "^4.28.1"
   },
   "dependencies": {
-    "esbuild": "^0.23.1",
-    "pathe": "^1.1.2"
+    "esbuild": "^0.23.1"
   }
 }

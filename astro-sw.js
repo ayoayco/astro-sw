@@ -5,7 +5,7 @@
 
 import { readFile, writeFile, readdir, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import path from 'pathe';
+import { resolve, dirname, join } from 'node:path';
 import { build } from 'esbuild';
 
 const ASTROSW = '@ayco/astro-sw';
@@ -96,7 +96,7 @@ export default function serviceWorker(options) {
         registerSW();`
 
     let output = 'static';
-    const __dirname = path.resolve(path.dirname('.'));
+    const __dirname = resolve(dirname('.'));
 
     return {
         'name': ASTROSW,
@@ -132,7 +132,7 @@ declare const __prefix: string;`
             'astro:build:done': async ({ dir, routes, pages, logger }) => {
                 const outfile = fileURLToPath(new URL('./sw.js', dir));
                 const swPath = (serviceWorkerPath && serviceWorkerPath !== '')
-                    ? path.join(__dirname, serviceWorkerPath)
+                    ? join(__dirname, serviceWorkerPath)
                     : undefined;
                 let originalScript;
 

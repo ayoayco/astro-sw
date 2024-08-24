@@ -2,8 +2,7 @@
 
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
-import serviceWorker from "./packages/index.js";
-import { Strategies } from "./packages/strategies/index.js";
+import serviceWorker from "./astro-sw.js";
 
 export default defineConfig({
   output: "hybrid",
@@ -34,9 +33,6 @@ export default defineConfig({
             console.log('>>> registrered', sw)
         }
       },
-      experimental: {
-        strategy: Strategies.CacheRevalidatePreloadFallback,
-      }
     })
   ]
 });
