@@ -57,12 +57,12 @@ export default function serviceWorker(options) {
     } = options || {};
 
     const {
-        installing: installingFn = () => {},
-        waiting: waitingFn = () => {},
-        active: activeFn = () => {},
-        error: errorFn = () => {},
-        unsupported: unsupportedFn = () => {},
-        afterRegistration: afterRegistrationFn = () => {},
+        installing: installingFn = () => { },
+        waiting: waitingFn = () => { },
+        active: activeFn = () => { },
+        error: errorFn = () => { },
+        unsupported: unsupportedFn = () => { },
+        afterRegistration: afterRegistrationFn = () => { },
     } = registrationHooks;
 
     /**
@@ -114,15 +114,14 @@ export default function serviceWorker(options) {
                     injectScript('page', registrationScript);
                 }
             },
-            'astro:config:done': async ({injectTypes, logger}) => {
+            'astro:config:done': async ({ injectTypes, logger }) => {
                 let injectedTypes = `
 declare const __assets: string[];
 declare const __version: string;
 declare const __prefix: string;`
-                injectTypes({filename: 'caching.d.ts', content: injectedTypes})
+                injectTypes({ filename: 'caching.d.ts', content: injectedTypes })
             },
             'astro:build:ssr': ({ manifest }) => {
-
                 if (output !== 'static') {
                     assets = manifest.assets
                 }
@@ -194,7 +193,7 @@ declare const __prefix: string;`
                     logger.error(`Service worker script not found! ${swPath}`)
                     if (!swPath) {
 
-                    logger.error(`
+                        logger.error(`
 
 [${ASTROSW}]  ERR: The 'path' option is required!
 [${ASTROSW}] INFO: Please see service worker options in https://ayco.io/gh/astro-sw#readme
@@ -205,10 +204,6 @@ declare const __prefix: string;`
                 const assetsDeclaration = `const __assets = ${JSON.stringify(assets)};\n`;
                 const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`;
                 const prefixDeclaration = `const __prefix = ${JSON.stringify(assetCachePrefix)};\n`;
-
-                /**
-                 * TODO: allow importing in dev's sw.js by resolving imports
-                 */
 
                 const tempFile = `${swPath}.tmp.ts`;
 
