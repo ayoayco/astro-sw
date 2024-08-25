@@ -122,12 +122,10 @@ declare const __prefix: string;`
                 injectTypes({filename: 'caching.d.ts', content: injectedTypes})
             },
             'astro:build:ssr': ({ manifest }) => {
-                const files = manifest.routes.map(route => route.file.replaceAll('/', ''));
-                const assetsMinusFiles = manifest.assets.filter(ass => !files.includes(ass.replaceAll('/', '')));
 
-                assets = output === 'static'
-                    ? assetsMinusFiles
-                    : manifest.assets.filter(ass => !ass.includes('sw.js'));
+                if (output !== 'static') {
+                    assets = manifest.assets
+                }
             },
             'astro:build:done': async ({ dir, routes, pages, logger }) => {
                 const outfile = fileURLToPath(new URL('./sw.js', dir));
