@@ -25,7 +25,8 @@
     "build": "astro build",
     "build:preview:static": "astro build && astro preview",
     "build:preview": "astro build && node ./server.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier . --write"
   },
   "keywords": [
     "withastro",
@@ -38,7 +39,9 @@
     "@fastify/middie": "^8.3.1",
     "@fastify/static": "^7.0.4",
     "astro": "^4.15.2",
-    "fastify": "^4.28.1"
+    "fastify": "^4.28.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
   },
   "dependencies": {
     "esbuild": "^0.23.1"

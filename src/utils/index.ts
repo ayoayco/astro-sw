@@ -1,3 +1,3 @@
 export function log(message: any, ...data) {
-    console.log(message, ...data)
+  console.log(message, ...data)
 }
