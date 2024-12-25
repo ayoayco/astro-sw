@@ -1,5 +1,3 @@
-import { log } from './utils'
-
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  * -- find usage in package readme; `astro.config.mjs` integrations
@@ -12,7 +10,7 @@ const addResourcesToCache = async (resources) => {
   await cache.addAll(resources)
 }
 
-log('test log', { hello: 'world' })
+console.log('test log', { hello: 'world' })
 
 const putInCache = async (request, response) => {
   const cache = await caches.open(cacheName)
@@ -48,6 +46,7 @@ const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
     // and serve second one
     putInCache(request, responseFromNetwork.clone())
     return responseFromNetwork
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     const fallbackResponse = await caches.match(fallbackUrl)
     if (fallbackResponse) {

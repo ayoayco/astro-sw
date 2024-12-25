@@ -22,11 +22,14 @@
   },
   "scripts": {
     "start": "astro dev",
+    "dev": "astro dev",
     "build": "astro build",
     "build:preview:static": "astro build && astro preview",
     "build:preview": "astro build && node ./server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "lint": "eslint . --config eslint.config.mjs",
+    "prepare": "husky"
   },
   "keywords": [
     "withastro",
@@ -36,12 +39,21 @@
   "license": "MIT",
   "devDependencies": {
     "@astrojs/node": "^8.3.3",
+    "@eslint/js": "^9.17.0",
     "@fastify/middie": "^8.3.1",
     "@fastify/static": "^7.0.4",
     "astro": "^4.15.2",
+    "astro-eslint-parser": "^1.1.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "fastify": "^4.28.1",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
     "prettier": "^3.4.2",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.18.2",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "esbuild": "^0.23.1"

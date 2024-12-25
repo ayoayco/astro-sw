@@ -95,30 +95,25 @@ export default function serviceWorker(options) {
 
         registerSW();`
 
-  let output = 'static'
+  // let output = 'static'
   const __dirname = resolve(dirname('.'))
 
   return {
     name: ASTROSW,
     hooks: {
-      'astro:config:setup': async ({
-        injectScript,
-        config: _config,
-        command,
-        logger,
-      }) => {
+      'astro:config:setup': async ({ injectScript, command, logger }) => {
         if (!serviceWorkerPath || serviceWorkerPath === '') {
           // REQUIRED OPTION IS MISSING
           logger.error('Missing required path to service worker script')
         }
         // const transformedScript=await transform(registrationScript)
 
-        output = _config.output
+        // output = _config.output
         if (command === 'build') {
           injectScript('page', registrationScript)
         }
       },
-      'astro:config:done': async ({ injectTypes, logger }) => {
+      'astro:config:done': async ({ injectTypes }) => {
         let injectedTypes = `
 declare const __assets: string[];
 declare const __version: string;

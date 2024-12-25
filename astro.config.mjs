@@ -17,6 +17,7 @@ export default defineConfig({
         // '/threads'
       ],
       excludeRoutes: ['/exclude'],
+      assetCachePrefix: 'hey',
       logAssets: true,
       esbuild: {
         minify: true,
