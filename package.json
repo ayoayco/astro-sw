@@ -10,6 +10,9 @@
   "exports": {
     ".": {
       "import": "./astro-sw.js"
+    },
+    "./globals": {
+      "import": "./globals.js"
     }
   },
   "main": "./astro-sw.js",
