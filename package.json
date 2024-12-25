@@ -10,6 +10,9 @@
   "exports": {
     ".": {
       "import": "./astro-sw.js"
+    },
+    "eslint-plugin-astro-sw": {
+      "import": "./eslint-plugin-astro-sw.js"
     }
   },
   "main": "./astro-sw.js",
