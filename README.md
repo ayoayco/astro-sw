@@ -64,9 +64,9 @@ export default defineConfig({
 
 The most important variable your service worker will have access to is `__assets`, which contains all routes and public assets that Astro includes in your build. Additionally, you will also get `__prefix` and `__version` you can use for naming & invalidating your Cache storage (useful for debugging purposes).
 
-## eslint globals
+## `eslint` globals
 
-Because of the injected variables not being defined in your script, you might get `eslint` errors for the undefined variables when you have the `no-undef` rule. You can use our exported `globals` object in your eslint config as follows:
+Because of the injected variables not being defined in your script, you might get `eslint` errors for the undefined variables when you have the `no-undef` rule. To prevent this, you can use our exported `globals` object in your eslint config as follows:
 
 ```js
 import astroSwGlobals from "@ayco/astro-sw/globals";
