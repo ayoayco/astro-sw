@@ -33,10 +33,11 @@ export default defineConfig({
   integrations: [
     serviceWorker({
       path: "./src/sw.ts",
-    })
-  ]
+    }),
+  ],
 });
 ```
+
 For more options available, see the [API](#api).
 
 ## TypeScript support
@@ -52,10 +53,10 @@ export default defineConfig({
     serviceWorker({
       path: "./src/sw.ts",
       esbuild: {
-        minify: true
-      }
-    })
-  ]
+        minify: true,
+      },
+    }),
+  ],
 });
 ```
 
@@ -63,11 +64,32 @@ export default defineConfig({
 
 The most important variable your service worker will have access to is `__assets`, which contains all routes and public assets that Astro includes in your build. Additionally, you will also get `__prefix` and `__version` you can use for naming & invalidating your Cache storage (useful for debugging purposes).
 
+## eslint globals
+
+Because of the injected variables not being defined in your script, you might get `eslint` errors for the undefined variables when you have the `no-undef` rule. You can use our exported `globals` object in your eslint config as follows:
+
+```js
+import astroSwGlobals from "@ayco/astro-sw/globals";
+
+export default [
+  {
+    languageOptions: {
+      globals: {
+        ...astroSwGlobals,
+      },
+    },
+  },
+  // add more generic rule sets here, such as:
+  // jsPlugin.configs.recommended,
+];
+```
+
 ## Registration Hooks
 
 Hooks are provided for adding custom logic that triggers in various service worker registration events.
 
 The following properties are available for the `registrationHooks` configuration:
+
 1. `installing` - when the registration is 'installing'
 1. `waiting` - when the registration is 'waiting'
 1. `active` - when the registration is 'active'
@@ -85,17 +107,17 @@ export default defineConfig({
       path: "./src/sw.ts",
       registrationHooks: {
         afterRegistration: async () => {
-            const sw = await navigator.serviceWorker.getRegistration();
-            console.log('>>> registrered', sw)
+          const sw = await navigator.serviceWorker.getRegistration();
+          console.log(">>> registrered", sw);
         },
-        installing: () => console.log('installing...'),
-        waiting: () => console.log('waiting...'),
-        active: () => console.log('active...'),
+        installing: () => console.log("installing..."),
+        waiting: () => console.log("waiting..."),
+        active: () => console.log("active..."),
         error: (error) => console.error(error),
-        unsupported: () => console.log(':('),
-      }
-    })
-  ]
+        unsupported: () => console.log(":("),
+      },
+    }),
+  ],
 });
 ```
 
@@ -103,16 +125,16 @@ export default defineConfig({
 
 The integration accepts a configuration object with the following properties
 
-| property | type | required? |  notes |
-| --- | --- | --- | --- |
-| path | string | required | path to your *own* service worker script; no surprises & easy debugging |
-| assetCachePrefix | string | optional | cache storage name prefix |
-| assetCacheVersionID | string | optional | cache storage name versioning; by default, a random UUID is used |
-| customRoutes | string[] | optional | list of custom routes you want to be cached. Beware that non-existent routes that result to HTTP Error404 will cause the service worker to fail |
-| excludeRoutes | string[] | optional | list of routes you want to be ignored/removed from assets |
-| logAssets | boolean | optional | set to see a list of the assets found; defaults to false |
-| esbuild | [BuildOptions](https://esbuild.github.io/api/) | optional | custom build options for your service worker script |
-| registrationHooks | object | optional | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks) |
+| property            | type                                           | required? | notes                                                                                                                                           |
+| ------------------- | ---------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| path                | string                                         | required  | path to your _own_ service worker script; no surprises & easy debugging                                                                         |
+| assetCachePrefix    | string                                         | optional  | cache storage name prefix                                                                                                                       |
+| assetCacheVersionID | string                                         | optional  | cache storage name versioning; by default, a random UUID is used                                                                                |
+| customRoutes        | string[]                                       | optional  | list of custom routes you want to be cached. Beware that non-existent routes that result to HTTP Error404 will cause the service worker to fail |
+| excludeRoutes       | string[]                                       | optional  | list of routes you want to be ignored/removed from assets                                                                                       |
+| logAssets           | boolean                                        | optional  | set to see a list of the assets found; defaults to false                                                                                        |
+| esbuild             | [BuildOptions](https://esbuild.github.io/api/) | optional  | custom build options for your service worker script                                                                                             |
+| registrationHooks   | object                                         | optional  | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks)                                     |
 
 ## Background
 
