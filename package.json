@@ -2,10 +2,10 @@
   "name": "@ayco/astro-sw",
   "version": "0.8.14",
   "description": "Use your own authored service worker with Astro",
-  "homepage": "https://github.com/ayoayco/astro-sw",
+  "homepage": "https://ayco.io/n/@ayco/astro-sw",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ayoayco/astro-sw"
+    "url": "https://git.sr.ht/~ayoayco/astro-sw"
   },
   "exports": {
     ".": {

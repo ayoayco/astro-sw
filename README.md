@@ -1,3 +1,6 @@
+> [!NOTE]
+> This project moved to [SourceHut](https://git.sr.ht/~ayoayco/astro-sw).
+
 # Astro SW
 
 [![Package information: NPM version](https://img.shields.io/npm/v/@ayco/astro-sw)](https://www.npmjs.com/package/@ayco/astro-sw)
