@@ -8,13 +8,15 @@
     "url": "https://git.sr.ht/~ayoayco/astro-sw"
   },
   "exports": {
-    ".": {
-      "import": "./astro-sw.js"
-    },
-    "./globals": {
-      "import": "./globals.js"
-    }
+    ".": "./astro-sw.js",
+    "./globals": "./globals.js",
+    "./strategies/*": "./strategies/*"
   },
+  "files": [
+    "astro-sw.js",
+    "globals.js",
+    "strategies/*"
+  ],
   "main": "./astro-sw.js",
   "type": "module",
   "engines": {
