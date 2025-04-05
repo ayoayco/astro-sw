@@ -5,7 +5,7 @@ import node from '@astrojs/node'
 import serviceWorker from './astro-sw.js'
 
 export default defineConfig({
-  output: 'hybrid',
+  output: 'static',
   adapter: node({
     mode: 'middleware',
   }),
