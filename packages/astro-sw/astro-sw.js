@@ -68,7 +68,7 @@ export default function serviceWorker(options) {
   /**
    * @type {Array<string>}
    */
-  let assets = []
+  let manifestAssets = []
 
   const registrationScript = `const registerSW = async () => {
             if ("serviceWorker" in navigator) {
@@ -121,9 +121,14 @@ declare const __prefix: string;`
         injectTypes({ filename: 'caching.d.ts', content: injectedTypes })
       },
       'astro:build:ssr': ({ manifest }) => {
-        assets = manifest.assets
+        manifestAssets = manifest.assets
       },
-      'astro:build:done': async ({ dir, routes, pages, logger }) => {
+      'astro:build:done': async ({
+        dir,
+        assets: astroAssets,
+        pages,
+        logger,
+      }) => {
         const outfile = fileURLToPath(new URL('./sw.js', dir))
         const swPath =
           serviceWorkerPath && serviceWorkerPath !== ''
@@ -137,13 +142,9 @@ declare const __prefix: string;`
           .filter((dirent) => dirent.isFile())
           .map((dirent) => `/${dirent.name}`)
 
-        const _routes =
-          routes
-            .filter(({ isIndex }) => isIndex)
-            .flatMap(({ pathname }) =>
-              pathname === '/' ? pathname : [pathname, `${pathname}/`]
-            )
-            .filter((pathname) => pathname !== '') ?? []
+        const _assets = Array.from(astroAssets.keys())
+          .filter((key) => !key.includes('[...slug]'))
+          .flatMap((key) => (key === '/' ? key : [key, `${key}/`]))
 
         const _pages =
           pages
@@ -167,10 +168,10 @@ declare const __prefix: string;`
           ...excludeRoutes.map((route) => `${route}/`),
         ]
 
-        assets = [
+        const __assets = [
           ...new Set([
-            ...assets,
-            ..._routes,
+            ...manifestAssets,
+            ..._assets,
             ..._pages,
             ..._pagesWithoutEndSlash,
             ...customRoutes,
@@ -187,17 +188,17 @@ declare const __prefix: string;`
 
         if (logAssets) {
           logger.info(
-            `${assets.length} assets for caching: \n  ▶ ${assets.toString().replaceAll(',', '\n  ▶ ')}\n`
+            `${__assets.length} assets for caching: \n  ▶ ${__assets.toString().replaceAll(',', '\n  ▶ ')}\n`
           )
         } else {
-          logger.info(`${assets.length} assets for caching.`)
+          logger.info(`${__assets.length} assets for caching.`)
         }
 
         try {
           logger.info(`Using service worker in path: ${swPath}`)
           originalScript = await readFile(swPath)
-        } catch {
-          logger.error(`Service worker script not found! ${swPath}`)
+        } catch (err) {
+          logger.error(err)
           if (!swPath) {
             logger.error(`
 
@@ -207,7 +208,7 @@ declare const __prefix: string;`
           }
         }
 
-        const assetsDeclaration = `const __assets = ${JSON.stringify(assets)};\n`
+        const assetsDeclaration = `const __assets = ${JSON.stringify(__assets)};\n`
         const versionDeclaration = `const __version = ${JSON.stringify(assetCacheVersionID)};\n`
         const prefixDeclaration = `const __prefix = ${JSON.stringify(assetCachePrefix)};\n`
 

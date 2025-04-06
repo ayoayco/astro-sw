@@ -1,6 +1,6 @@
 {
   "name": "@ayco/astro-sw",
-  "version": "0.8.14",
+  "version": "0.9.0",
   "description": "Use your own authored service worker with Astro",
   "homepage": "https://ayco.io/n/@ayco/astro-sw",
   "repository": {
@@ -13,8 +13,7 @@
   },
   "files": [
     "astro-sw.js",
-    "globals.js",
-    "strategies/*"
+    "globals.js"
   ],
   "main": "./astro-sw.js",
   "type": "module",
@@ -22,7 +21,10 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
   },
   "keywords": [
     "withastro",
@@ -33,7 +35,7 @@
   "dependencies": {
     "esbuild": "^0.25.2"
   },
-  "devDependencies": {
-    "astro": "^5.6.1"
+  "peerDependencies": {
+    "astro": "^5.6"
   }
 }
