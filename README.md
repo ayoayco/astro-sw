@@ -1,6 +1,3 @@
-> [!NOTE]
-> This project moved to [SourceHut](https://git.sr.ht/~ayoayco/astro-sw).
-
 # Astro SW
 
 [![Package information: NPM version](https://img.shields.io/npm/v/@ayco/astro-sw)](https://www.npmjs.com/package/@ayco/astro-sw)
@@ -12,16 +9,29 @@ The integration accepts the path to your service worker and automatically inject
 
 It works on all Astro output options: `static`, `server`, or `hybrid`, and lets developers retain the flexibility for various [caching strategies](https://developer.chrome.com/docs/workbox/caching-strategies-overview/).
 
+## Background
+
+This integration was originally developed to support the Caching strategy needs of [Cozy](https://cozy.pub) -- the modern reading companion for the Web. You can find [an example service worker in the repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
+
+Work is ongoing for adding `presets` for easily using common caching strategies and customizing the behavior of the service worker via the config options. This will remove the need for writing the service worker script by hand for most use cases.
+
+Get in touch:
+1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
+1. Email a ticket: [~ayoayco/astro-sw@todo.sr.ht](mailto:~ayoayco/astro-sw@todo.sr.ht)
+1. Submit via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
+1. Start a [GitHub discussion](https://github.com/ayoayco/wcb/discussions)
+1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
+
 ## Installation
 
 In your [Astro](https://astro.build) project:
 
 ```bash
 # if using npm
-$ npm i -D @ayco/astro-sw
+$ npm i @ayco/astro-sw
 
 # if using pnpm
-$ pnpm add -D @ayco/astro-sw
+$ pnpm add @ayco/astro-sw
 ```
 
 ## Minimal Usage
@@ -139,6 +149,3 @@ The integration accepts a configuration object with the following properties
 | esbuild             | [BuildOptions](https://esbuild.github.io/api/) | optional  | custom build options for your service worker script                                                                                             |
 | registrationHooks   | object                                         | optional  | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks)                                     |
 
-## Background
-
-This integration was developed to support the Caching strategy needs of [Cozy](https://cozy.pub) -- the modern reading companion for the Web. You can find [an example service worker in the repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
