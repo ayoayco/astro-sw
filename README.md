@@ -13,7 +13,7 @@ It works on all Astro output options: `static`, `server`, or `hybrid`, and lets 
 
 This integration was originally developed to support the Caching strategy needs of [Cozy](https://cozy.pub) -- the modern reading companion for the Web. You can find [an example service worker in the repository](https://github.com/ayoayco/Cozy/blob/main/src/sw.mjs).
 
-Work is ongoing for adding `presets` for easily using common caching strategies and customizing the behavior of the service worker via the config options. This will remove the need for writing the service worker script by hand for most use cases.
+There is a work in progress adding `presets` for using common caching strategies and customizing the behavior of the service worker via config options. This aims to reduce the need for writing the service worker script by hand for most use cases.
 
 Get in touch:
 1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
