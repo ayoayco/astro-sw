@@ -17,8 +17,7 @@ Work is ongoing for adding `presets` for easily using common caching strategies 
 
 Get in touch:
 1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
-1. Email a ticket: [~ayoayco/astro-sw@todo.sr.ht](mailto:~ayoayco/astro-sw@todo.sr.ht)
-1. Submit via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
+1. Submit tickets via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
 1. Start a [GitHub discussion](https://github.com/ayoayco/wcb/discussions)
 1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
 
