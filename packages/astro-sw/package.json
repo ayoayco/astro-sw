@@ -9,8 +9,7 @@
   },
   "exports": {
     ".": "./astro-sw.js",
-    "./globals": "./globals.js",
-    "./strategies/*": "./strategies/*"
+    "./globals": "./globals.js"
   },
   "files": [
     "astro-sw.js",
