@@ -1,0 +1,40 @@
+{
+  "name": "@ayco/astro-sw",
+  "version": "0.8.14",
+  "description": "Use your own authored service worker with Astro",
+  "homepage": "https://ayco.io/n/@ayco/astro-sw",
+  "repository": {
+    "type": "git",
+    "url": "https://git.sr.ht/~ayoayco/astro-sw"
+  },
+  "exports": {
+    ".": "./astro-sw.js",
+    "./globals": "./globals.js",
+    "./strategies/*": "./strategies/*"
+  },
+  "files": [
+    "astro-sw.js",
+    "globals.js",
+    "strategies/*"
+  ],
+  "main": "./astro-sw.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [
+    "withastro",
+    "perf"
+  ],
+  "author": "Ayo Ayco",
+  "license": "MIT",
+  "dependencies": {
+    "esbuild": "^0.25.2"
+  },
+  "devDependencies": {
+    "astro": "^5.6.1"
+  }
+}

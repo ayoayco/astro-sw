@@ -22,11 +22,9 @@ export default [
   ...eslintPluginAstro.configs['jsx-a11y-recommended'],
   {
     ignores: [
-      'dist/*',
-      '.output/*',
-      '.astro/*',
-      'site/*',
-      'templates/*',
+      '**/dist/*',
+      '**/.output/*',
+      '**/.astro/*',
       '**/node_modules/*',
       '**/env.d.ts',
     ],
