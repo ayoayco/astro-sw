@@ -2,7 +2,7 @@
 
 import { defineConfig } from 'astro/config'
 import node from '@astrojs/node'
-import serviceWorker from '@ayco/astro-sw'
+import serviceWorker from '../package/src/astro-sw'
 
 export default defineConfig({
   output: 'static',
