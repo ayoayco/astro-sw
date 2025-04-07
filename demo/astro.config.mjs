@@ -2,7 +2,8 @@
 
 import { defineConfig } from 'astro/config'
 import node from '@astrojs/node'
-import serviceWorker from '../package/src/astro-sw'
+import serviceWorker from '@ayco/astro-sw'
+import { deleteOldCaches, staleWhileRevalidate } from '@ayco/astro-sw/presets'
 
 export default defineConfig({
   output: 'static',
@@ -13,6 +14,7 @@ export default defineConfig({
   integrations: [
     serviceWorker({
       path: './src/example_sw.js',
+      presets: [staleWhileRevalidate(), deleteOldCaches()],
       customRoutes: [
         // '/threads'
       ],

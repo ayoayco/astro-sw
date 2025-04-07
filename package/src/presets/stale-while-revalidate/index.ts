@@ -3,14 +3,12 @@
  */
 
 import { ServiceWorkerPreset } from '../../types'
-import activate from './activate'
 import install from './install'
 import fetch from './fetch'
 
-export const presetStaleWhileRevalidate: ServiceWorkerPreset = {
-  activate,
+export const staleWhileRevalidate: () => ServiceWorkerPreset = () => ({
   install,
   fetch,
-}
+})
 
-export default presetStaleWhileRevalidate
+export default staleWhileRevalidate
