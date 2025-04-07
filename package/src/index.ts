@@ -18,6 +18,7 @@ const ASTROSW = '@ayco/astro-sw'
  */
 export default function serviceWorker(options: Config): AstroIntegration {
   const {
+    presets,
     assetCachePrefix = ASTROSW,
     assetCacheVersionID = '0',
     path: serviceWorkerPath = undefined,
@@ -36,6 +37,9 @@ export default function serviceWorker(options: Config): AstroIntegration {
     unsupported: unsupportedFn = () => {},
     afterRegistration: afterRegistrationFn = () => {},
   } = registrationHooks
+
+  // TODO use presets
+  console.log(presets)
 
   /**
    * @type {Array<string>}

@@ -8,8 +8,18 @@
     "url": "https://git.sr.ht/~ayoayco/astro-sw"
   },
   "exports": {
-    ".": "./dist/astro-sw.js",
-    "./globals": "./dist/globals.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./globals": {
+      "types": "./dist/eslint/globals.d.ts",
+      "default": "./dist/eslint/globals.js"
+    },
+    "./presets/**": {
+      "types": "./dist/presets/**/index.d.ts",
+      "default": "./dist/presets/**/index.js"
+    }
   },
   "files": [
     "dist"
@@ -20,7 +30,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsup src/** --format esm --dts --clean",
+    "build": "tsup src/**/index.ts src/eslint/globals.ts --format esm --dts --clean",
     "test": "vitest run",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
