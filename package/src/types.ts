@@ -1,6 +1,6 @@
 import type { BuildOptions } from 'esbuild'
 
-export type ServiceWorkerPreset = {
+export type AstroServiceWorkerPreset = {
   activate?: (options: { event: ExtendableEvent; cacheName: string }) => void
   install?: (options: {
     event: ExtendableEvent
@@ -10,9 +10,9 @@ export type ServiceWorkerPreset = {
   fetch?: (options: { event: FetchEvent; cacheName: string }) => void
 }
 
-export type Config = {
+export type AstroServiceWorkerConfig = {
   path?: string
-  presets?: ServiceWorkerPreset[]
+  presets?: AstroServiceWorkerPreset[]
   assetCachePrefix?: string
   assetCacheVersionID?: string
   customRoutes?: string[]

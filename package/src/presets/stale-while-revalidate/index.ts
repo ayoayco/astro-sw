@@ -2,11 +2,11 @@
  * preset for stale-while-revalidate caching strategy
  */
 
-import { ServiceWorkerPreset } from '../../types'
+import { AstroServiceWorkerPreset } from '../../types'
 import install from './install'
 import fetch from './fetch'
 
-export const staleWhileRevalidate: () => ServiceWorkerPreset = () => ({
+export const staleWhileRevalidate: () => AstroServiceWorkerPreset = () => ({
   install,
   fetch,
 })

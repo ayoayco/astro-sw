@@ -1,8 +1,8 @@
-import { ServiceWorkerPreset } from '../../types'
+import { AstroServiceWorkerPreset } from '../../types'
 
 declare const self: ServiceWorkerGlobalScope
 
-export const installFn: ServiceWorkerPreset['install'] = ({
+export const installFn: AstroServiceWorkerPreset['install'] = ({
   event,
   routes,
   cacheName,

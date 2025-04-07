@@ -1,6 +1,9 @@
-import { ServiceWorkerPreset } from '../../types'
+import { AstroServiceWorkerPreset } from '../../types'
 
-export const fetchFn: ServiceWorkerPreset['fetch'] = ({ event, cacheName }) => {
+export const fetchFn: AstroServiceWorkerPreset['fetch'] = ({
+  event,
+  cacheName,
+}) => {
   console.info('fetch happened', { data: event })
 
   event.respondWith(

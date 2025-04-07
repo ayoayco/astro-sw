@@ -1,7 +1,7 @@
-import { ServiceWorkerPreset } from '../../types'
+import { AstroServiceWorkerPreset } from '../../types'
 import activate from './activate'
 
-export const deleteOldCaches: () => ServiceWorkerPreset = () => ({
+export const deleteOldCaches: () => AstroServiceWorkerPreset = () => ({
   activate,
 })
 

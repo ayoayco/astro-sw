@@ -1,6 +1,6 @@
-import { ServiceWorkerPreset } from '../../types'
+import { AstroServiceWorkerPreset } from '../../types'
 
-export const activateFn: ServiceWorkerPreset['activate'] = async ({
+export const activateFn: AstroServiceWorkerPreset['activate'] = async ({
   cacheName,
 }) => {
   const allowCacheNames = [cacheName]
