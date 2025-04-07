@@ -42,9 +42,6 @@ export default function serviceWorker(
     afterRegistration: afterRegistrationFn = () => {},
   } = registrationHooks
 
-  // TODO use presets
-  console.log(presets)
-
   /**
    * @type {Array<string>}
    */
@@ -174,12 +171,13 @@ declare const __prefix: string;`
           logger.info(`${__assets.length} assets for caching.`)
         }
 
-        try {
+        if (!!swPath && swPath !== '') {
           logger.info(`Using service worker in path: ${swPath}`)
-          // @ts-expect-error undefined error is caught via try-catch
           originalScript = await readFile(swPath)
-        } catch (err: unknown) {
-          logger.error(JSON.stringify(err))
+        } else if (!!presets && presets.length > 0) {
+          // TODO use presets
+          // build originalScript with callbacks provided by presets
+        } else {
           if (!swPath) {
             logger.error(`
 
