@@ -18,7 +18,7 @@ There is a work in progress adding `presets` for using common caching strategies
 Get in touch:
 1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
 1. Submit tickets via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
-1. Start a [GitHub discussion](https://github.com/ayoayco/wcb/discussions)
+1. Start a [GitHub discussion](https://github.com/ayoayco/astro-sw/discussions)
 1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
 
 ## Installation
