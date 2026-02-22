@@ -16,7 +16,6 @@ This integration was originally developed to support the Caching strategy needs 
 There is a work in progress adding `presets` for using common caching strategies and customizing the behavior of the service worker via config options. This aims to reduce the need for writing the service worker script by hand for most use cases.
 
 Get in touch:
-1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
 1. Submit tickets via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
 1. Start a [GitHub discussion](https://github.com/ayoayco/astro-sw/discussions)
 1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
@@ -147,4 +146,3 @@ The integration accepts a configuration object with the following properties
 | logAssets           | boolean                                        | optional  | set to see a list of the assets found; defaults to false                                                                                        |
 | esbuild             | [BuildOptions](https://esbuild.github.io/api/) | optional  | custom build options for your service worker script                                                                                             |
 | registrationHooks   | object                                         | optional  | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks)                                     |
-
