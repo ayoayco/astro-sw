@@ -11,11 +11,12 @@
     "test": "pnpm -F @ayco/astro-sw test",
     "build": "pnpm -F @ayco/astro-sw build",
     "demo": "pnpm run build && pnpm -F demo build:preview",
+    "dev": "pnpm run demo",
     "postinstall": "pnpm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@git.sr.ht/~ayoayco/astro-sw.git"
+    "url": "https://git.ayo.run/ayo/astro-sw"
   },
   "author": "Ayo Ayco",
   "license": "MIT",

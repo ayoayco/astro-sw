@@ -1,0 +1,3 @@
+echo "pre-commit..."
+pnpm run lint
+pnpm run test
