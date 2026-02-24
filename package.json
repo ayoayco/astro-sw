@@ -2,7 +2,6 @@
   "name": "astro-sw-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "> [!NOTE] > This project moved to [SourceHut](https://git.sr.ht/~ayoayco/astro-sw).",
   "scripts": {
     "format": "prettier . --write",
     "lint": "eslint . --config eslint.config.mjs --cache",
