@@ -6,6 +6,7 @@
   "scripts": {
     "format": "prettier . --write",
     "lint": "eslint . --config eslint.config.mjs --cache",
+    "lint:fix": "eslint . --config eslint.config.mjs --fix",
     "check": "npm run format && npm run lint",
     "prepare": "husky",
     "test": "pnpm -F @ayco/astro-sw test",
