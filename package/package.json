@@ -2,7 +2,7 @@
   "name": "@ayco/astro-sw",
   "author": "Ayo Ayco",
   "license": "MIT",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "repository": {
     "type": "git",
     "url": "https://git.ayo.run/ayo/astro-sw"
@@ -47,8 +47,6 @@
     "withastro",
     "perf"
   ],
-  "author": "Ayo Ayco",
-  "license": "MIT",
   "dependencies": {
     "esbuild": "^0.27.4"
   },
