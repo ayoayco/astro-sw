@@ -1,6 +1,6 @@
 {
   "name": "@ayco/astro-sw",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Use your own authored service worker with Astro",
   "homepage": "https://ayco.io/n/@ayco/astro-sw",
   "repository": {
