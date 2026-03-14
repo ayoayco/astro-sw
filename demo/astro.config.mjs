@@ -13,7 +13,7 @@ export default defineConfig({
   site: 'https://ayo.ayco.io',
   integrations: [
     serviceWorker({
-      path: './src/example_sw.js',
+      path: './src/sw.ts',
       presets: [staleWhileRevalidate(), deleteOldCaches()],
       customRoutes: [
         // '/threads'
