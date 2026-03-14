@@ -3,6 +3,8 @@ dist/
 .astro/
 package-lock.json
 
+package/README.md
+
 *~
 *swo
 *swp
