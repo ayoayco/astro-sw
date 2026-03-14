@@ -146,3 +146,8 @@ The integration accepts a configuration object with the following properties
 | logAssets           | boolean                                        | optional  | set to see a list of the assets found; defaults to false                                                                                        |
 | esbuild             | [BuildOptions](https://esbuild.github.io/api/) | optional  | custom build options for your service worker script                                                                                             |
 | registrationHooks   | object                                         | optional  | provide callbacks for various registration events; see section on [Registration Hooks](#registration-hooks)                                     |
+
+---
+
+_Just keep building._<br>
+_A project by [Ayo](https://ayo.ayco.io)_
