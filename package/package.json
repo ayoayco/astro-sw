@@ -26,7 +26,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "../README.md"
   ],
   "main": "./astro-sw.js",
   "type": "module",
