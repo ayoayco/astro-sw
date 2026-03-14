@@ -19,13 +19,6 @@
     "dev": "pnpm run demo",
     "postinstall": "pnpm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://git.ayo.run/ayo/astro-sw"
-  },
-  "author": "Ayo Ayco",
-  "license": "MIT",
-  "homepage": "https://ayco.io/n/@ayco/astro-sw#readme",
   "devDependencies": {
     "@ayco/astro-sw": "*",
     "@eslint/js": "^10.0.1",

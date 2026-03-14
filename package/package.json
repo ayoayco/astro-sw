@@ -1,12 +1,13 @@
 {
   "name": "@ayco/astro-sw",
+  "author": "Ayo Ayco",
+  "license": "MIT",
   "version": "0.9.3",
-  "description": "Use your own authored service worker with Astro",
-  "homepage": "https://ayco.io/n/@ayco/astro-sw",
   "repository": {
     "type": "git",
-    "url": "https://git.sr.ht/~ayoayco/astro-sw"
+    "url": "https://git.ayo.run/ayo/astro-sw"
   },
+  "description": "Use your own authored service worker with Astro",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
